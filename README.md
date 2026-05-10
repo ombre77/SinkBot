@@ -9,7 +9,7 @@ It provides game-related information with the commands "/trinkets" and "/gow"
 
 ### Requirements:
 - Python
-- discord.py (```bash pip install discord```)
+- discord.py (```pip install discord```)
 
 ### 1. Clone the repository
 
