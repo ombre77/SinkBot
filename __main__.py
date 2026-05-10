@@ -6,7 +6,7 @@ import json
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(".env")
 GUILD_ID = os.getenv("GUILD_ID")
 
 intents = discord.Intents.default()
@@ -31,7 +31,7 @@ async def gow(interaction: discord.Interaction,level:app_commands.Range[int,1,7]
     #load map
     file=custom.JSON_map("gow_costs.json")
     file.load()
-    if level-1<0 or level-1>len(map):
+    if level-1<0 or level-1>len(file.map):
         await interaction.response.send_message("Not a valid level")
     mapped:dict=file.map[level-1]
     trinkets=mapped.get("trinkets","Placeholder")
@@ -39,7 +39,7 @@ async def gow(interaction: discord.Interaction,level:app_commands.Range[int,1,7]
     buff=mapped.get("desc","Placeholder")
 
     #message
-    embed=custom.Message(f"Wheat Level {level}")
+    embed=custom.Message(f"Wheat Level {level}",discord.Color.gold(),buff)
 
     embed.add_category(name="Trinkets:", content=trinkets, inline=True)
     embed.add_category(name="Golden Strings:", content=strings, inline=True)
