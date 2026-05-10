@@ -44,7 +44,7 @@ async def gow(interaction: discord.Interaction,level:app_commands.Range[int,1,7]
     embed.add_category(name="Trinkets:", content=trinkets, inline=True)
     embed.add_category(name="Golden Strings:", content=strings, inline=True)
 
-    await interaction.response.send_message(embed=embed)
+    await interaction.response.send_message(embed=embed.render())
 
 @bot.tree.command(name="trinket", description="Give the price of trinkets")
 async def gow(interaction: discord.Interaction,count:int):
@@ -73,7 +73,7 @@ async def gow(interaction: discord.Interaction,count:int):
     embed.add_category(name="Hay bales:", content=haybales)
     embed.add_category(name="Weaved wheats:", content=wheat)
 
-    await interaction.response.send_message(embed=embed)
+    await interaction.response.send_message(embed=embed.render())
 
 if __name__ == "__main__":
     TOKEN = os.getenv("DISCORD_TOKEN")

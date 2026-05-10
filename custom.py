@@ -14,7 +14,7 @@ class Message:
             color=self.color,
             description=self.desc
         )
-        self.embed.set_footer("developed by Odysseus :3")
+        self.footer("developed by Odysseus :3")
     
     def add_category(self,name:str,content:str,inline=True):
         self.embed.add_field(name=name,value=content,inline=inline)
