@@ -3,9 +3,11 @@ from discord.ext import commands
 from discord import app_commands
 import custom
 import json
+import os
+from dotenv import load_dotenv
 
-with open(".server_id","r") as file:
-    GUILD_ID = file.read()
+load_dotenv()
+GUILD_ID = os.getenv("GUILD_ID")
 
 intents = discord.Intents.default()
 
@@ -73,7 +75,6 @@ async def gow(interaction: discord.Interaction,count:int):
 
     await interaction.response.send_message(embed=embed)
 
-with open(".token","r") as token:
-    TOKEN=token.read()
-
-bot.run(TOKEN)
+if __name__ == "__main__":
+    TOKEN = os.getenv("DISCORD_TOKEN")
+    bot.run(TOKEN)

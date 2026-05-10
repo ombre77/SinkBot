@@ -20,10 +20,14 @@ cd WheatBot
 
 ### 2. Setup the bot
 
-Enter your bot token in **.token**  
-Enter your server id in **.server_id**
+Create a `.env` file in the **WheatBot** folder with the following content:
 
-### 3. Lauch
+```
+DISCORD_TOKEN=your_bot_token_here
+GUILD_ID=your_server_id_here
+```
+
+### 3. Launch
 Open a terminal in the **WheatBot** folder then type ```bash python .``` and let the file running.
 
  ---
