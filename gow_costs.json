@@ -1,0 +1,11 @@
+{
+    "map": [
+        {"level":1, "trinkets":1,"string":1, "desc":"Efficient Harvesting: Makes you gain an additional Wheat when mining Hay Bales."},
+        {"level":2, "trinkets":16,"string":4, "desc":"Zoomies: +50% Base Ground Speed, stacks with Weaved Harvester VI."},
+        {"level":3, "trinkets":32, "string":16, "desc":"Glided String: +50% Chance for +1 Golden String, stacks with Shears."},
+        {"level":4, "trinkets":64, "string":24, "desc":"Vault Storage: Unlocks @bank, allowing infinite storage of 3 items."},
+        {"level":5, "trinkets":128, "string":32, "desc":"Capitalism: 0.1% chance to get money when anyone sells wheat."},
+        {"level":6, "trinkets":192, "string":48, "desc":"Communism: 0.1% chance to get wheat when anyone breaks a haybale."},
+        {"level":7, "trinkets":256, "string":64, "desc":"Hay Breaker: Whenever the wheat area resets, breaking a hay bale counts as breaking 1.5 hay bales."} 
+    ]
+}
