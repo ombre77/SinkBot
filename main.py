@@ -28,6 +28,7 @@ async def on_ready():
 
 @bot.tree.command(name="gow", description="GoW cost at each level")
 async def gow(interaction: discord.Interaction,level:app_commands.Range[int,1,7]):
+    custom.LogCommand.log(f"gow {level}",interaction.user)
     #load map
     file=custom.JSON_map("gow_costs.json")
     file.load()
@@ -48,6 +49,7 @@ async def gow(interaction: discord.Interaction,level:app_commands.Range[int,1,7]
 
 @bot.tree.command(name="trinket", description="Give the price of trinkets")
 async def gow(interaction: discord.Interaction,count:int):
+    custom.LogCommand.log(f"trinket {count}",interaction.user)
     #load map
     file=custom.JSON_map("trinkets_costs.json")
     file.load()
