@@ -64,6 +64,7 @@ class LogCommand:
         print(f"[{day:02}/{month:02}/{year:02} {hour:02}:{minute:02}:{second:02}] User {user} issued command '{name}'")
 
 class MessageHelper:
+    default_ops=["Server Owner","Helpers","Testers"]
     COLOR_MAP = {
     "default": discord.Color.default(),
     "random": discord.Color.random(),

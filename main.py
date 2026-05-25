@@ -86,7 +86,7 @@ async def trinkets(interaction: discord.Interaction,count:int):
     color="Color code (examples: gold(default),red,yellow,..)"
 )
 async def announce(interaction:discord.Interaction,title:str,message:str,color:str="gold"):
-    if not custom.MessageHelper.role_check(interaction):
+    if not custom.MessageHelper.role_check(interaction,custom.MessageHelper.default_ops):
         return
     custom.LogCommand.log("announce",interaction.user)
     clr=custom.MessageHelper.COLOR_MAP.get(color,discord.Color.gold())
