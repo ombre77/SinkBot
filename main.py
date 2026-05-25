@@ -5,8 +5,10 @@ import custom
 import json
 import os
 from dotenv import load_dotenv
-
-load_dotenv(".env_priv")
+if os.path.exists("./.env_priv"):
+    load_dotenv(".env_priv")
+else:
+    load_dotenv(".env")
 GUILD_ID = os.getenv("GUILD_ID")
 
 intents = discord.Intents.default()
@@ -48,7 +50,7 @@ async def gow(interaction: discord.Interaction,level:app_commands.Range[int,1,7]
     await interaction.response.send_message(embed=embed.render())
 
 @bot.tree.command(name="trinket", description="Give the price of trinkets")
-async def gow(interaction: discord.Interaction,count:int):
+async def trinkets(interaction: discord.Interaction,count:int):
     custom.LogCommand.log(f"trinket {count}",interaction.user)
     #load map
     file=custom.JSON_map("trinkets_costs.json")
@@ -74,6 +76,22 @@ async def gow(interaction: discord.Interaction,count:int):
 
     embed.add_category(name="Hay bales:", content=haybales)
     embed.add_category(name="Weaved wheats:", content=wheat)
+
+    await interaction.response.send_message(embed=embed.render())
+
+@bot.tree.command(name="announce",description="Make fancy announcements")
+@app_commands.describe(
+    title="Title",
+    message="Content",
+    color="Color code (examples: gold(default),red,yellow,..)"
+)
+async def announce(interaction:discord.Interaction,title:str,message:str,color:str="gold"):
+    if not custom.MessageHelper.role_check(interaction):
+        return
+    custom.LogCommand.log("announce",interaction.user)
+    clr=custom.MessageHelper.COLOR_MAP.get(color,discord.Color.gold())
+    embed=custom.Message(title,clr,f"WheatGame-{custom.MessageHelper.version()}")
+    embed.add_category("",message,bold=True)
 
     await interaction.response.send_message(embed=embed.render())
 
