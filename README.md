@@ -41,3 +41,4 @@ Open a terminal in the **WheatBot** folder then type `python .` and let the file
 - " **/gow [level]** " get the price and the buff of a specific **Gift of Wheat** level
 - " **/trinkets [count]** " get the price of a certain amount of **trinkets**
 - " **/announce [title] [message] ([color])** " send a pretty announcement
+- " **/setversion [new_version]** " set the new game version

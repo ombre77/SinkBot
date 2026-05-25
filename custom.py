@@ -38,6 +38,17 @@ class JSON_map:
             file=json.load(f)
         self.map=file.get("map")
 
+class Json_set:
+    path=""
+    @classmethod
+    def set(cls,key,value):
+        file=JSON_map(cls.path)
+        file.load()
+        file.map[key]=value
+        new_content={"map":file.map}
+        with open(cls.path,"w") as f:
+            json.dump(new_content,f)
+
 class LogCommand:
     @classmethod
     def log(cls, name: str, user: str):
@@ -96,11 +107,24 @@ class MessageHelper:
     "yellow": discord.Color.yellow(),
 }
     @staticmethod
-    async def role_check(interaction:discord.Interaction,role:str="Helpers"):
-        is_role = discord.utils.get(
-            interaction.user.roles,
-            name=role
-        )
+    async def role_check(interaction:discord.Interaction,role:str|list[str]="Helpers"):
+        if isinstance(role,list):
+            can_execute=False
+            for r in role:
+                is_role = discord.utils.get(
+                    interaction.user.roles,
+                    name=role
+                )
+                if is_role is not None:
+                    can_execute=True
+                    break
+            if can_execute:
+                is_role=True
+        else:
+            is_role = discord.utils.get(
+                interaction.user.roles,
+                name=role
+            )
         if is_role is None:
             await interaction.response.send_message("You do not have the permission required to execute this",ephemeral=True)
             return False

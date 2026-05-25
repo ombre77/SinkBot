@@ -95,6 +95,17 @@ async def announce(interaction:discord.Interaction,title:str,message:str,color:s
 
     await interaction.response.send_message(embed=embed.render())
 
+@bot.tree.command(name="setversion",description="Set the Wheat Game version")
+async def setversion(interaction:discord.Interaction,new_version:str):
+    if not custom.MessageHelper.role_check(interaction,["Server Owner","Helpers","Testers"]):
+        return
+    file=custom.JSON_map("./.game_infos.json")
+    file.load()
+    old=file.map["version"]
+    custom.Json_set.path="./.game_infos.json"
+    custom.Json_set.set("version",new_version)
+    await interaction.response.send_message(f"Version has been set from {old} to {new_version}!",ephemeral=True)
+
 if __name__ == "__main__":
     TOKEN = os.getenv("DISCORD_TOKEN")
     bot.run(TOKEN)
