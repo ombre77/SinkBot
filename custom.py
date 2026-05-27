@@ -64,7 +64,7 @@ class LogCommand:
         print(f"[{day:02}/{month:02}/{year:02} {hour:02}:{minute:02}:{second:02}] User {user} issued command '{name}'")
 
 class MessageHelper:
-    default_ops=["Server Owner","Helpers","Testers"]
+    default_ops=["Server Owner","Helpers"]
     COLOR_MAP = {
     "default": discord.Color.default(),
     "random": discord.Color.random(),
@@ -137,3 +137,10 @@ class MessageHelper:
         file.load()
         map=file.map
         return map["version"]
+    
+    @staticmethod
+    def gamename():
+        file=JSON_map("./.game_infos.json")
+        file.load()
+        map=file.map
+        return map["name"]

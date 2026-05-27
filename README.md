@@ -42,3 +42,4 @@ Open a terminal in the **WheatBot** folder then type `python .` and let the file
 - " **/trinkets [count]** " get the price of a certain amount of **trinkets**
 - " **/announce [title] [message] ([color])** " send a pretty announcement
 - " **/setversion [new_version]** " set the new game version
+- " **/setname [new_name]** " set the new game version name
