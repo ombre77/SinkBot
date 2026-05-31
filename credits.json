@@ -7,6 +7,10 @@
     "slushyboy":{
         "display":"Slushyboy1212",
         "roles":["Code watcher","Wiki creator"]
+    },
+    "finny":{
+        "display":"Finny",
+        "roles":["Bot contributor"]
     }
 }
 }

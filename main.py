@@ -36,9 +36,9 @@ def channel_is_allowed(interaction: discord.Interaction, env_name: str) -> bool:
     return interaction.channel_id == allowed_channel
 
 
-def channel_denied_message(interaction: discord.Interaction, env_name: str) -> str:
+async def channel_denied_message(interaction: discord.Interaction, env_name: str) -> str:
     env_label = "WHEAT_BOT" if env_name == "WHEAT_BOT" else "SAND_BOT"
-    return f"This command can only be used in the {env_label} channel."
+    interaction.response.send_message(f"This command can only be used in the {env_label} channel.",ephemeral=True)
 
 async def def_guild(id):
     guild=discord.Object(id=id)
@@ -122,7 +122,7 @@ async def trinkets(interaction: discord.Interaction,count:int):
     color="Color code (examples: gold(default),red,yellow,..)"
 )
 async def announce(interaction:discord.Interaction,title:str,message:str,color:str="gold"):
-    if not custom.MessageHelper.role_check(interaction,custom.MessageHelper.default_ops):
+    if not await custom.MessageHelper.role_check(interaction,custom.MessageHelper.default_ops):
         return
     custom.LogCommand.log("announce",interaction.user)
     clr=custom.MessageHelper.COLOR_MAP.get(color,discord.Color.gold())
@@ -195,7 +195,7 @@ async def search(interaction:discord.Interaction,name:str):
 @bot.tree.command(name="what",description="Get infos on a SandSimu block")
 async def what(interaction:discord.Interaction,name:str):
     if not channel_is_allowed(interaction, "SAND_BOT"):
-        await interaction.response.send_message(channel_denied_message(interaction, "SAND_BOT"), ephemeral=True)
+        await channel_denied_message(interaction, "SAND_BOT")
         return
     custom.LogCommand.log("what",interaction.user.name)
     file=custom.JSON_map("./doc_block.json")
@@ -217,18 +217,98 @@ async def what(interaction:discord.Interaction,name:str):
 
     special=block.get("special",False)
 
-    pic_path=f"./blocks/{pic}"
-    img=Image.open(pic_path)
-    img=img.resize((256,256),Image.Resampling.NEAREST)
-    img.save("temp.png")
-    new_path="temp.png"
-
     message=custom.Message(bk_name,color,"")
-    message.embed.set_thumbnail(url=f"attachment://tumbnail.png")
+    pic_path=f"./blocks/{pic}"
+    if os.path.exists(pic_path):
+        try:
+            img=Image.open(pic_path)
+            img=img.resize((256,256),Image.Resampling.NEAREST)
+            img.save("temp.png")
+            new_path="temp.png"
+            message.embed.set_thumbnail(url=f"attachment://tumbnail.png")
+            await interaction.response.send_message(embed=message.embed,file=discord.File(new_path,"tumbnail.png"))
+            return
+        except Exception:
+            pass
+
     message.add_category(desc,"\n".join([f"- {"Else" if idx>0 else ""} {mov.lower() if idx>0 else mov}" for idx,mov in enumerate(move)]))
     if special:
         message.add_category("Special:","\n".join([f"- {spe}" for idx,spe in enumerate(special)]))
-    await interaction.response.send_message(embed=message.embed,file=discord.File(new_path,"tumbnail.png"))
+    await interaction.response.send_message(embed=message.render())
+
+@bot.tree.command(name="addblock",description="Add a new block")
+@app_commands.describe(
+    movements="Separate very behaviour with ',' NO SPACES",
+    special="Separate very behaviour with ',' NO SPACES"
+)
+async def addblock(interaction:discord.Interaction,name:str,display:str,image:str,desc:str,movements:str,color:str,special:str=None):
+    if not await custom.MessageHelper.role_check(interaction,custom.MessageHelper.default_ops):
+        return
+    if not channel_is_allowed(interaction,"SAND_BOT"):
+        await channel_denied_message(interaction,"SAND_BOT")
+    custom.LogCommand.log(f"addblock > '{name}' '{display}' '{image}' '{desc}' '{movements}' '{color}' '{special}'",interaction.user.name)
+    custom.Json_set.path="./doc_block.json"
+    move=movements.split(",")
+    if not color in colors.COLOR_MAP:
+        await interaction.response.send_message("Unknown color",ephemeral=True)
+        return
+    dic={"name":display,"image":image,"desc":desc,"movement":move,"color":color}
+    if special:
+        dic["special"]=special.split(",")
+    custom.Json_set.set(name,dic)
+    await interaction.response.send_message("Block added!",ephemeral=True)
+
+@bot.tree.command(name="delblock", description="Delete a block")
+async def delblock(interaction: discord.Interaction, name: str):
+    if not await custom.MessageHelper.role_check(interaction, custom.MessageHelper.default_ops):
+        return
+    if not channel_is_allowed(interaction, "SAND_BOT"):
+        await channel_denied_message(interaction, "SAND_BOT")
+        return
+    file = custom.JSON_map("./doc_block.json")
+    file.load()
+    if name not in file.map:
+        await interaction.response.send_message(f"Block `{name}` not found.", ephemeral=True)
+        return
+    del file.map[name]
+    with open(file.path, "w") as f:
+        json.dump({"map": file.map}, f, indent=4)
+    await interaction.response.send_message(f"Block `{name}` deleted.", ephemeral=True)
+
+@bot.tree.command(name="modblock", description="Modify a block field")
+@app_commands.describe(
+    name="Block key",
+    category="Field to modify (name, image, desc, movement, color, special)",
+    new_value="New value"
+)
+async def modblock(interaction: discord.Interaction, name: str, category: str, new_value: str):
+    if not await custom.MessageHelper.role_check(interaction, ["Server Owner","Helpers","Bot helpers"]):
+        return
+    if not channel_is_allowed(interaction, "SAND_BOT"):
+        await channel_denied_message(interaction, "SAND_BOT")
+        return
+    file = custom.JSON_map("./doc_block.json")
+    file.load()
+    block = file.map.get(name)
+    if not block:
+        await interaction.response.send_message(f"Block `{name}` not found.", ephemeral=True)
+        return
+    if category not in {"name", "image", "desc", "movement", "color", "special"}:
+        await interaction.response.send_message(
+            "Invalid category. Use: name, image, desc, movement, color, special",
+            ephemeral=True
+        )
+        return
+    if category in {"movement", "special"}:
+        block[category] = [item.strip() for item in new_value.split(",") if item.strip()]
+    else:
+        block[category] = new_value
+    with open(file.path, "w") as f:
+        json.dump({"map": file.map}, f, indent=4)
+    await interaction.response.send_message(
+        f"Block `{name}` updated: `{category}` → `{new_value}`",
+        ephemeral=True
+    )
 
 if __name__ == "__main__":
     TOKEN = os.getenv("DISCORD_TOKEN")

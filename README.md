@@ -54,3 +54,7 @@ Open a terminal in the **SinkBot** folder then type `python main.py` and let the
 ## Credits
 - `_ody77_` > *Main dev*, *Github owner*, *Bot owner*
 - `Slushyboy1212` > *Helper*, *Wiki creator*
+
+**Contributors**
+Thanks to all of you!
+- `Finny`

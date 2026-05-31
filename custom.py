@@ -50,7 +50,7 @@ class Json_set:
         file.map[key]=value
         new_content={"map":file.map}
         with open(cls.path,"w") as f:
-            json.dump(new_content,f)
+            json.dump(new_content, f, indent=4)
 
 class LogCommand:
     @classmethod
@@ -68,62 +68,17 @@ class LogCommand:
 
 class MessageHelper:
     default_ops=["Server Owner","Helpers"]
-    COLOR_MAP = {
-    "default": discord.Color.default(),
-    "random": discord.Color.random(),
-
-    "teal": discord.Color.teal(),
-    "dark_teal": discord.Color.dark_teal(),
-
-    "brand_green": discord.Color.brand_green(),
-    "green": discord.Color.green(),
-    "dark_green": discord.Color.dark_green(),
-
-    "blue": discord.Color.blue(),
-    "dark_blue": discord.Color.dark_blue(),
-
-    "purple": discord.Color.purple(),
-    "dark_purple": discord.Color.dark_purple(),
-
-    "magenta": discord.Color.magenta(),
-
-    "gold": discord.Color.gold(),
-    "dark_gold": discord.Color.dark_gold(),
-
-    "orange": discord.Color.orange(),
-    "dark_orange": discord.Color.dark_orange(),
-
-    "brand_red": discord.Color.brand_red(),
-    "red": discord.Color.red(),
-    "dark_red": discord.Color.dark_red(),
-
-    "lighter_grey": discord.Color.lighter_grey(),
-    "dark_grey": discord.Color.dark_grey(),
-    "light_grey": discord.Color.light_grey(),
-    "darker_grey": discord.Color.darker_grey(),
-
-    "og_blurple": discord.Color.og_blurple(),
-    "blurple": discord.Color.blurple(),
-    "greyple": discord.Color.greyple(),
-
-    "dark_theme": discord.Color.dark_theme(),
-    "fuchsia": discord.Color.fuchsia(),
-    "yellow": discord.Color.yellow(),
-}
     @staticmethod
     async def role_check(interaction:discord.Interaction,role:str|list[str]="Helpers"):
-        if isinstance(role,list):
-            can_execute=False
+        if isinstance(role, list):
+            is_role = None
             for r in role:
                 is_role = discord.utils.get(
                     interaction.user.roles,
-                    name=role
+                    name=r
                 )
                 if is_role is not None:
-                    can_execute=True
                     break
-            if can_execute:
-                is_role=True
         else:
             is_role = discord.utils.get(
                 interaction.user.roles,
