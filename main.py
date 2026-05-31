@@ -159,6 +159,22 @@ async def kick(interaction:discord.Interaction):
         return
     await interaction.guild.leave()
 
+@bot.tree.command(name="credits")
+async def credits(interaction:discord.Interaction):
+    file=custom.JSON_map("./credits.json")
+    file.load()
+    people:dict=file.map
+    message=custom.Message("**Credits**",discord.Color.pink(),"Thanks to all those people for helping me creating this bot")
+    for person in people:
+        infos=people[person]
+        display=infos["display"]
+        display="`"+display+"`"
+        roles:list=infos["roles"]
+        roles=["- "+role for role in roles]
+        str_content="\n".join(roles)
+        message.add_category(display,str_content,bold=True)
+    await interaction.response.send_message(embed=message.render())
+
 @bot.tree.command(name="search",description="Search for a block wich name contains <name>")
 async def search(interaction:discord.Interaction,name:str):
     if not channel_is_allowed(interaction, "SAND_BOT"):
