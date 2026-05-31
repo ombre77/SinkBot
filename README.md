@@ -46,7 +46,10 @@ Open a terminal in the **SinkBot** folder then type `python main.py` and let the
 **Sand commands**
 - " **/search [name]** " search all blocks with *name* in their name
 - " **/what [name]** " give infos on a block of the game
-
+- " **/addblock [name] [display] [image] [desc] [color ]<[special]>** " Add a block to the block list
+- " **/delblock [name]** " Del a block from the block list
+- " **/modblock [name] [key] [new_value]** " Modifiy an element from a block of the block list
+ 
 **Moderation commands**
 - " **/announce [title] [message] ([color])** " send a pretty announcement
 
