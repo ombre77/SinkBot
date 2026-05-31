@@ -1,0 +1,112 @@
+{"map":
+{
+    "sand":{"name":"Sand",
+        "image":"sand.png",
+        "desc":"A block of sand. Crunchy.",
+        "movement": ["Moves down","Move orthogonaly down"],
+        "color":"yellow"
+        },
+    "stone":{"name":"Stone",
+        "image":"stone.png",
+        "desc":"A block of stone. Chunky (plz dont eat tho).",
+        "movement":["Moves down"],
+        "color":"light_grey"
+        },
+    "metal":{"name":"Metal",
+            "image":"iron.png",
+            "desc":"A block of metal. Broke my teeths on that one.",
+            "movement":["Doesnt move on its own"],
+            "color":"lighter_grey"
+        },
+    "gravel":{"name":"Gravel",
+        "image":"gravel.png",
+        "desc":"A block of gravel. Crunchy and chunky.",
+        "movement": ["Moves down","Move orthogonaly down","Moves diagonnaly orthogonaly down"],
+        "color":"light_grey"
+        },
+    "water":{"name":"Water",
+        "image":"water.png",
+        "desc":"A block of water (???). Not a solid, its a liquid.",
+        "movement":["Moves down","Move orthogonaly in a random direction"],
+        "color":"light_grey"
+        },
+    "lava":{"name":"Lava",
+        "image":"lava.png",
+        "desc":"A block of lava (???). Kinda hot (not in that way, please).",
+        "movement":["Moves down","Move orthogonaly in a random direction"],
+        "color":"orange",
+        "special":["Destroys adajcent wood blocks","Turn adjacent sand into glass","Destroy himself and wtaer if standing next to"]
+        },
+    "wood":{"name":"Wood",
+        "image":"wood.png",
+        "desc":"A block of wood. Its wood.",
+        "movement": ["Doesnt move on its own"],
+        "color":"dark_orange"
+        },
+    "reinforced metal":{"name":"Reinforced Metal",
+            "image":"netherite.png",
+            "desc":"A nonchalant block of hard metal (not the music style). Its so hard that i will end the jock here before making it stranger.",
+            "movement":["Doesnt move on its own"],
+            "special":["Other blocks cant interact with him"],
+            "color":"darker_grey"
+        },
+    "crumbling stone":{"name":"Crumbling stone",
+        "image":"crumbling.png",
+        "desc":"A block of crumbling stone. Very shy.",
+        "movement":["Doesnt move on its own"],
+        "color":"light_grey",
+        "special":["Disappears after 3 update (~3 sec)"]
+        },
+    "cracked stone bricks":{"name":"Cracked stone bricks",
+        "image":"cracked.png",
+        "desc":"Cracked stone bricks. What? Did u thought i was gonna say 'A block of'?",
+        "movement":["Doesnt move on its own"],
+        "color":"light_grey",
+        "special":["When rclicked with pickaxe, all connected cracked stone bricks breaks."]
+        },
+    "reinforced cracked stone bricks":{"name":"Reinforced cracked stone bricks",
+        "image":"cracked2.png",
+        "desc":"Who is coming up with those names?",
+        "movement":["Doesnt move on its own"],
+        "color":"darker_grey",
+        "special":["When rclicked with pickaxe, all connected cracked stone bricks breaks.","Other blocks cant interact with him"]
+        },
+    "red sand":{"name":"Red colored sand",
+            "image":"red.png",
+            "desc":"Do you realize i gotta handwrite all of these blocks?",
+            "movement":["Moves down","Moves diagonnaly orthogonaly down"],
+            "color":"red"
+    },
+    "orange sand":{"name":"Orange colored sand",
+            "image":"orange.png",
+            "desc":"[insert custom desc here]",
+            "movement":["Moves down","Moves diagonnaly orthogonaly down"],
+            "color":"orange"
+    },
+    "yellow sand":{"name":"Yellow colored sand",
+            "image":"yellow.png",
+            "desc":"I like this one, its kinda like a sun. A sun thats falling down, but a sun.",
+            "movement":["Moves down","Moves diagonnaly orthogonaly down"],
+            "color":"gold"
+    },
+    "green sand":{"name":"Green colored sand",
+            "image":"green.png",
+            "desc":"A block of geen sand. Wonder how it got that color...",
+            "movement":["Moves down","Moves diagonnaly orthogonaly down"],
+            "color":"green"
+    },
+    "blue sand":{"name":"Blue colored sand",
+            "image":"blue.png",
+            "desc":"Its currently 3:5am in France when im writing this. Hope you actually enjoy this bot",
+            "movement":["Moves down","Moves diagonnaly orthogonaly down"],
+            "color":"blue"
+    },
+    "purple sand":{"name":"Purple colored sand",
+            "image":"purple.png",
+            "desc":"So much purple block in this game!",
+            "movement":["Moves down","Moves diagonnaly orthogonaly down"],
+            "color":"purple"
+    }
+    
+}
+}

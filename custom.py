@@ -18,8 +18,11 @@ class Message:
         self.footer("developed by Odysseus :3")
     
     def add_category(self,name:str,content:str,inline=True,bold=False):
+        content=str(content)
         if bold:
             content=f"**{content}**"
+        contents=content.split("\\n")
+        content="\n".join(contents)
         self.embed.add_field(name=name,value=content,inline=inline)
 
     def footer(self,content:str):
@@ -127,7 +130,7 @@ class MessageHelper:
                 name=role
             )
         if is_role is None:
-            await interaction.response.send_message("You do not have the permission required to execute this",ephemeral=True)
+            await interaction.response.send_message("WHEATBOT / You do not have the permission required to execute this",ephemeral=True)
             return False
         return True
     
