@@ -2,9 +2,9 @@
     "map": {
         "sand": {
             "name": "Sand",
-            "image": "sand.png",
+            "image": "sand",
             "desc": "A block of sand. Crunchy.",
-            "movesment": [
+            "movement": [
                 "Moves down",
                 "Moves orthogonally down"
             ],
@@ -12,27 +12,27 @@
         },
         "stone": {
             "name": "Stone",
-            "image": "stone.png",
+            "image": "stone",
             "desc": "A block of stone. Chunky (plz dont eat tho).",
-            "movesment": [
+            "movement": [
                 "Moves down"
             ],
             "color": "light_grey"
         },
         "metal": {
             "name": "Metal",
-            "image": "iron.png",
+            "image": "iron",
             "desc": "A block of metal. Broke my teeths on that one.",
-            "movesment": [
+            "movement": [
                 "Doesnt moves on its own"
             ],
             "color": "lighter_grey"
         },
         "gravel": {
             "name": "Gravel",
-            "image": "gravel.png",
+            "image": "gravel",
             "desc": "A block of gravel. Crunchy and chunky.",
-            "movesment": [
+            "movement": [
                 "Moves down",
                 "Moves orthogonally down",
                 "Moves diagonally orthogonally down"
@@ -41,9 +41,9 @@
         },
         "water": {
             "name": "Water",
-            "image": "water.png",
+            "image": "water",
             "desc": "A block of water (???). Not a solid, its a liquid.",
-            "movesment": [
+            "movement": [
                 "Moves down",
                 "Moves orthogonally in a random direction"
             ],
@@ -51,9 +51,9 @@
         },
         "lava": {
             "name": "Lava",
-            "image": "lava.png",
+            "image": "lava",
             "desc": "A block of lava (???). Kinda hot (not in that way, please).",
-            "movesment": [
+            "movement": [
                 "Moves down",
                 "Moves orthogonally in a random direction"
             ],
@@ -66,18 +66,18 @@
         },
         "wood": {
             "name": "Wood",
-            "image": "wood.png",
+            "image": "wood",
             "desc": "A block of wood. Its wood.",
-            "movesment": [
+            "movement": [
                 "Doesnt moves on its own"
             ],
             "color": "dark_orange"
         },
         "reinforced metal": {
             "name": "Reinforced Metal",
-            "image": "netherite.png",
+            "image": "netherite",
             "desc": "A nonchalant block of hard metal (not the music style). Its so hard that i will end the jock here before making it stranger.",
-            "movesment": [
+            "movement": [
                 "Doesnt moves on its own"
             ],
             "special": [
@@ -87,9 +87,9 @@
         },
         "crumbling stone": {
             "name": "Crumbling stone",
-            "image": "crumbling.png",
+            "image": "crumbling",
             "desc": "A block of crumbling stone. Very shy.",
-            "movesment": [
+            "movement": [
                 "Doesnt moves on its own"
             ],
             "color": "light_grey",
@@ -99,9 +99,9 @@
         },
         "cracked stone bricks": {
             "name": "Cracked stone bricks",
-            "image": "cracked.png",
+            "image": "cracked",
             "desc": "Cracked stone bricks. What? Did u thought i was gonna say 'A block of'?",
-            "movesment": [
+            "movement": [
                 "Doesnt moves on its own"
             ],
             "color": "light_grey",
@@ -111,9 +111,9 @@
         },
         "reinforced cracked stone bricks": {
             "name": "Reinforced cracked stone bricks",
-            "image": "cracked2.png",
+            "image": "cracked2",
             "desc": "Who is coming up with those names?",
-            "movesment": [
+            "movement": [
                 "Doesnt moves on its own"
             ],
             "color": "darker_grey",
@@ -124,9 +124,9 @@
         },
         "red sand": {
             "name": "Red colored sand",
-            "image": "red.png",
+            "image": "red",
             "desc": "Do you realize i gotta handwrite all of these blocks?",
-            "movesment": [
+            "movement": [
                 "Moves down",
                 "Moves diagonally orthogonally down"
             ],
@@ -134,9 +134,9 @@
         },
         "orange sand": {
             "name": "Orange colored sand",
-            "image": "orange.png",
+            "image": "orange",
             "desc": "[insert custom desc here]",
-            "movesment": [
+            "movement": [
                 "Moves down",
                 "Moves diagonally orthogonally down"
             ],
@@ -144,9 +144,9 @@
         },
         "yellow sand": {
             "name": "Yellow colored sand",
-            "image": "yellow.png",
+            "image": "yellow",
             "desc": "I like this one, its kinda like a sun. A sun thats falling down, but a sun.",
-            "movesment": [
+            "movement": [
                 "Moves down",
                 "Moves diagonally orthogonally down"
             ],
@@ -154,9 +154,9 @@
         },
         "green sand": {
             "name": "Green colored sand",
-            "image": "green.png",
+            "image": "green",
             "desc": "A block of geen sand. Wonder how it got that color...",
-            "movesment": [
+            "movement": [
                 "Moves down",
                 "Moves diagonally orthogonally down"
             ],
@@ -164,9 +164,9 @@
         },
         "blue sand": {
             "name": "Blue colored sand",
-            "image": "blue.png",
+            "image": "blue",
             "desc": "Its currently 3:5am in France when im writing this. Hope you actually enjoy this bot",
-            "movesment": [
+            "movement": [
                 "Moves down",
                 "Moves diagonally orthogonally down"
             ],
@@ -174,9 +174,9 @@
         },
         "purple sand": {
             "name": "Purple colored sand",
-            "image": "purple.png",
+            "image": "purple",
             "desc": "So much purple block in this game!",
-            "movesment": [
+            "movement": [
                 "Moves down",
                 "Moves diagonally orthogonally down"
             ],
@@ -184,7 +184,7 @@
         },
         "ant": {
             "name": "Ant",
-            "image": "ant.png",
+            "image": "ant",
             "desc": "Life !",
             "movement": [
                 "Moves randomly on the axis it's placed"
@@ -193,7 +193,7 @@
         },
         "block cloner": {
             "name": "Block Cloner",
-            "image": "blockcloner.png",
+            "image": "dispenser_front",
             "desc": "For all your cloning needs",
             "movement": [
                 "Doesn't move on its own"
@@ -205,7 +205,7 @@
         },
         "directional block cloner": {
             "name": "Directional Block Cloner",
-            "image": "observer.png",
+            "image": "observer_front",
             "desc": "Cloning with directions",
             "movement": [
                 "Doesn't move on its own"
@@ -213,6 +213,55 @@
             "color": "light_grey",
             "special": [
                 "If the back of it is Air, Clones the Block on the Face to the Back of the block"
+            ]
+        },
+        "dual allower": {
+            "name": "Dual Allower",
+            "image": "dualallower",
+            "desc": "Allower but for both sides.",
+            "movement": [
+                "Doesn't move on its own"
+            ],
+            "color": "orange",
+            "special": [
+                "If the blocks Above and Below don't Match Removes Both Blocks"
+            ]
+        },
+        "and": {
+            "name": "And Block",
+            "image": "and",
+            "desc": "A and block. Welcome to the world of logic.",
+            "movement": [
+                "Doesn't move on its own"
+            ],
+            "color": "light_grey",
+            "special": [
+                "If the blocks Above and Two Above are the same, Destroys both and makes that type of block below itself"
+            ]
+        },
+        "wire": {
+            "name": "Wire",
+            "image": "copper_block",
+            "desc": "Electricity is yummy :p",
+            "movement": [
+                "Doesnt moves on its own"
+            ],
+            "color": "orange",
+            "special": [
+                "Conduct power to adjacent wire blocks or adjacent powerable blocks"
+            ]
+        },
+        "wire-sm": {
+            "name": "Wire-sm",
+            "image": "copper_block",
+            "desc": "*bzzt* Ow!",
+            "movement": [
+                "Doesn't move on its own."
+            ],
+            "color": "orange",
+            "special": [
+                "When powered turns into powered wire.",
+                " Powered wire:next tick, powers blocks around it and turns into wire after 2 more ticks"
             ]
         }
     }

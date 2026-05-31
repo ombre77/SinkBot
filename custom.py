@@ -3,6 +3,11 @@ from discord.ext import commands
 from discord import app_commands
 import json
 import time
+import aiohttp
+from PIL import Image
+from io import BytesIO
+
+bothelp=["Server Owner","Helpers","Bot helpers"]
 
 class Message:
     def __init__(self,title:str,color:discord.Color,desc:str=None):
@@ -102,3 +107,36 @@ class MessageHelper:
         file.load()
         map=file.map
         return map["name"]
+
+class GetTexture:
+    TEXTURE_BASE = "https://raw.githubusercontent.com/ombre77/McTexturesBlocks/main/block"
+    @classmethod
+    async def get(cls,name):
+        texture_url = f"{cls.TEXTURE_BASE}/{name}.png"
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(texture_url) as resp:
+                    if resp.status == 200:
+                        data = await resp.read()
+
+                        img = Image.open(BytesIO(data))
+                        img = img.resize((256, 256), Image.Resampling.NEAREST)
+
+                        output = BytesIO()
+                        img.save(output, format="PNG")
+                        output.seek(0)
+
+                        file = discord.File(output, filename="thumbnail.png")
+                        return file
+
+        except Exception as e:
+            print(f"Image not found -> {name}")
+            return "File not found"
+    
+    @staticmethod
+    async def exists(texture: str) -> bool:
+        url = f"{GetTexture.TEXTURE_BASE}/{texture}.png"
+
+        async with aiohttp.ClientSession() as session:
+            async with session.head(url) as resp:
+                return resp.status == 200

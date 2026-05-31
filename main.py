@@ -180,11 +180,12 @@ async def search(interaction:discord.Interaction,name:str):
     if not channel_is_allowed(interaction, "SAND_BOT"):
         await interaction.response.send_message(channel_denied_message(interaction, "SAND_BOT"), ephemeral=True)
         return
+    name=name.lower()
     custom.LogCommand.log("search",interaction.user.name)
     file=custom.JSON_map("./doc_block.json")
     file.load()
     blocks=file.map
-    potentials=[blocks[bk] for bk in blocks if name in bk]
+    potentials=[blocks[bk] for bk in blocks if name in bk.lower()]
     message=custom.Message(f"Results for '{name}':",discord.Colour.gold(),f"{len(potentials)} results")
     for potential in potentials:
         bk_name=potential["name"]
@@ -197,14 +198,15 @@ async def what(interaction:discord.Interaction,name:str):
     if not channel_is_allowed(interaction, "SAND_BOT"):
         await channel_denied_message(interaction, "SAND_BOT")
         return
+    name=name.lower()
     custom.LogCommand.log("what",interaction.user.name)
     file=custom.JSON_map("./doc_block.json")
     file.load()
     blocks=file.map
 
-    is_in=any(name==bk for bk in blocks)
+    is_in=any(name==bk.lower() for bk in blocks)
     if not is_in:
-        await interaction.response.send_message("Unknown block name. Try using /search maybe?",ephemeral=True)
+        await interaction.response.send_message("Unknown block name. Try using /search maybe? _dbgblks=" + blocks,ephemeral=True)
         return
     
     block=blocks[name]
@@ -218,49 +220,56 @@ async def what(interaction:discord.Interaction,name:str):
     special=block.get("special",False)
 
     message=custom.Message(bk_name,color,"")
-    pic_path=f"./blocks/{pic}"
-    if os.path.exists(pic_path):
-        try:
-            img=Image.open(pic_path)
-            img=img.resize((256,256),Image.Resampling.NEAREST)
-            img.save("temp.png")
-            new_path="temp.png"
-            message.embed.set_thumbnail(url=f"attachment://tumbnail.png")
-            await interaction.response.send_message(embed=message.embed,file=discord.File(new_path,"tumbnail.png"))
-            return
-        except Exception:
-            pass
 
     message.add_category(desc,"\n".join([f"- {"Else" if idx>0 else ""} {mov.lower() if idx>0 else mov}" for idx,mov in enumerate(move)]))
     if special:
         message.add_category("Special:","\n".join([f"- {spe}" for idx,spe in enumerate(special)]))
-    await interaction.response.send_message(embed=message.render())
+    
+    file=await custom.GetTexture.get(pic)
+    message.embed.set_thumbnail(url="attachment://thumbnail.png")
+
+    await interaction.response.send_message(embed=message.render(),file=file)
 
 @bot.tree.command(name="addblock",description="Add a new block")
 @app_commands.describe(
-    movements="Separate very behaviour with ',' NO SPACES",
-    special="Separate very behaviour with ',' NO SPACES"
+    image="USE MINECRAFT ID NOT CUSTOM LIKE 'SWAPPER'",
+    movements="Separate very behaviour with ';' NO SPACES",
+    special="Separate very behaviour with ';' NO SPACES"
 )
 async def addblock(interaction:discord.Interaction,name:str,display:str,image:str,desc:str,movements:str,color:str,special:str=None):
-    if not await custom.MessageHelper.role_check(interaction,custom.MessageHelper.default_ops):
+    custom.LogCommand.log(f"addblock > '{name}' '{display}' '{image}' '{desc}' '{movements}' '{color}' '{special}'",interaction.user.name)
+    if not await custom.MessageHelper.role_check(interaction,custom.bothelp):
         return
     if not channel_is_allowed(interaction,"SAND_BOT"):
         await channel_denied_message(interaction,"SAND_BOT")
-    custom.LogCommand.log(f"addblock > '{name}' '{display}' '{image}' '{desc}' '{movements}' '{color}' '{special}'",interaction.user.name)
     custom.Json_set.path="./doc_block.json"
-    move=movements.split(",")
+
+    move=movements.split(";")
+
     if not color in colors.COLOR_MAP:
         await interaction.response.send_message("Unknown color",ephemeral=True)
         return
+    
+    if not await custom.GetTexture.exists(image):
+        await interaction.response.send_message(
+            f"Texture `{image}` not found in McTexturesBlocks. Remember to use Mc block id and include face like xxx_side, xxx_front, etc if needed",
+            ephemeral=True
+        )
+        return
+
     dic={"name":display,"image":image,"desc":desc,"movement":move,"color":color}
+
     if special:
-        dic["special"]=special.split(",")
-    custom.Json_set.set(name,dic)
+        dic["special"]=special.split(";")
+
+    custom.Json_set.set(name.lower(),dic)
+
     await interaction.response.send_message("Block added!",ephemeral=True)
 
 @bot.tree.command(name="delblock", description="Delete a block")
 async def delblock(interaction: discord.Interaction, name: str):
-    if not await custom.MessageHelper.role_check(interaction, custom.MessageHelper.default_ops):
+    custom.LogCommand.log(f"delblock > '{name}'",interaction.user.name)
+    if not await custom.MessageHelper.role_check(interaction, custom.bothelp):
         return
     if not channel_is_allowed(interaction, "SAND_BOT"):
         await channel_denied_message(interaction, "SAND_BOT")
@@ -278,12 +287,13 @@ async def delblock(interaction: discord.Interaction, name: str):
 @bot.tree.command(name="modblock", description="Modify a block field")
 @app_commands.describe(
     name="Block key",
-    category="Field to modify (name, image, desc, movement, color, special)",
+    category="Field to modify (name, display, image, desc, movement, color, special)",
     new_value="New value"
 )
 async def modblock(interaction: discord.Interaction, name: str, category: str, new_value: str):
-    if not await custom.MessageHelper.role_check(interaction, ["Server Owner","Helpers","Bot helpers"]):
-        return
+    custom.LogCommand.log(f"modblock > '{name}' '{category}' '{new_value}'",interaction.user.name)
+    if not await custom.MessageHelper.role_check(interaction, custom.bothelp):
+        return  
     if not channel_is_allowed(interaction, "SAND_BOT"):
         await channel_denied_message(interaction, "SAND_BOT")
         return
@@ -293,14 +303,21 @@ async def modblock(interaction: discord.Interaction, name: str, category: str, n
     if not block:
         await interaction.response.send_message(f"Block `{name}` not found.", ephemeral=True)
         return
-    if category not in {"name", "image", "desc", "movement", "color", "special"}:
+    if category not in {"name","display", "image", "desc", "movement", "color", "special"}:
         await interaction.response.send_message(
-            "Invalid category. Use: name, image, desc, movement, color, special",
+            "Invalid category. Use: name, display, image, desc, movement, color, special",
             ephemeral=True
         )
         return
+    if category == "image":
+        if not await custom.GetTexture.exists(new_value):
+            await interaction.response.send_message(
+                f"Texture `{new_value}` not found in McTexturesBlocks. Remember to use minecraft block texture id like cobblestone, or observer_front.",
+                ephemeral=True
+            )
+            return
     if category in {"movement", "special"}:
-        block[category] = [item.strip() for item in new_value.split(",") if item.strip()]
+        block[category] = [item.strip() for item in new_value.split(";") if item.strip()]
     else:
         block[category] = new_value
     with open(file.path, "w") as f:
