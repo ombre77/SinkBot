@@ -70,8 +70,24 @@ class LogCommand:
         second = now.tm_sec 
 
         print(f"[{day:02}/{month:02}/{year:02} {hour:02}:{minute:02}:{second:02}] User {user} issued command '{name}'")
+    
+    @staticmethod
+    def logg(message:str):
+        now = time.localtime()
+
+        day = now.tm_mday
+        month = now.tm_mon         
+        year = now.tm_year % 100  
+        hour = now.tm_hour         
+        minute = now.tm_min 
+        second = now.tm_sec 
+
+        print(f"[{day:02}/{month:02}/{year:02} {hour:02}:{minute:02}:{second:02}] {message}")
 
 class MessageHelper:
+    class emoji:
+        check="✅"
+        cross="❌"
     default_ops=["Server Owner","Helpers"]
     @staticmethod
     async def role_check(interaction:discord.Interaction,role:str|list[str]="Helpers"):

@@ -124,7 +124,7 @@
         },
         "red sand": {
             "name": "Red colored sand",
-            "image": "red",
+            "image": "red_concrete_powder",
             "desc": "Do you realize i gotta handwrite all of these blocks?",
             "movement": [
                 "Moves down",
@@ -134,7 +134,7 @@
         },
         "orange sand": {
             "name": "Orange colored sand",
-            "image": "orange",
+            "image": "orange_concrete_powder",
             "desc": "[insert custom desc here]",
             "movement": [
                 "Moves down",
@@ -144,7 +144,7 @@
         },
         "yellow sand": {
             "name": "Yellow colored sand",
-            "image": "yellow",
+            "image": "yellow_concrete_powder",
             "desc": "I like this one, its kinda like a sun. A sun thats falling down, but a sun.",
             "movement": [
                 "Moves down",
@@ -164,7 +164,7 @@
         },
         "blue sand": {
             "name": "Blue colored sand",
-            "image": "blue",
+            "image": "light_blue_concrete_powder",
             "desc": "Its currently 3:5am in France when im writing this. Hope you actually enjoy this bot",
             "movement": [
                 "Moves down",
@@ -229,7 +229,7 @@
         },
         "and": {
             "name": "And Block",
-            "image": "and",
+            "image": "ancient_debris_side",
             "desc": "A and block. Welcome to the world of logic.",
             "movement": [
                 "Doesn't move on its own"
@@ -263,6 +263,205 @@
                 "When powered turns into powered wire.",
                 " Powered wire:next tick, powers blocks around it and turns into wire after 2 more ticks"
             ]
+        },
+        "conditional swapper": {
+            "name": "Conditional Swapper",
+            "image": "stripped_crimson_stem",
+            "desc": "if true then swap",
+            "movement": [
+                "Doesn't Move on its Own"
+            ],
+            "color": "purple",
+            "special": [
+                "Swaps the Blocks on Each Side of It Only if there is a block Above it."
+            ]
+        },
+        "omni swapper": {
+            "name": "Omni Swapper",
+            "image": "purpur_block",
+            "desc": "Elite level Swapper",
+            "movement": [
+                "Doesn't Move on its Own"
+            ],
+            "color": "purple",
+            "special": [
+                "Other Blocks Cannot Clone this Block, and this Block type cannot move itself.",
+                "Swaps all 6 Adjacent Blocks."
+            ]
+        },
+        "absorber": {
+            "name": "Absorber",
+            "image": "oxidized_copper_grate",
+            "desc": "nom nom nom",
+            "movement": [
+                "Doesn't Move on its Own"
+            ],
+            "color": "teal",
+            "special": [
+                "Removes the Block Above itself"
+            ]
+        },
+        "dual absorber": {
+            "name": "Dual Absorber",
+            "image": "oxidized_chiseled_copper",
+            "desc": "A block sandwitch!",
+            "movement": [
+                "Doesn't Move on its Own"
+            ],
+            "color": "teal",
+            "special": [
+                "If there is Any Block Above AND Below it, Removes Both Blocks"
+            ]
+        },
+        "denier": {
+            "name": "Denier",
+            "image": "weathered_copper_grate",
+            "desc": "non non non (to all my french people)",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "teal",
+            "special": [
+                "If the Block Above and Below it Match, Deletes the Block Above it"
+            ]
+        },
+        "dual denier": {
+            "name": "Dual Denier",
+            "image": "weathered_chiseled_copper",
+            "desc": "A denier, but double the deletion",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "teal",
+            "special": [
+                "If the blocks Above and Below match, Removes Both Blocks"
+            ]
+        },
+        "directional absorber": {
+            "name": "Directional Absorber",
+            "image": "dispenser_front",
+            "desc": "Wouldn't face this one",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "light_grey",
+            "special": [
+                "Removes the Block on the Face"
+            ]
+        },
+        "directional dual absorber": {
+            "name": "Directional Dual Absorber",
+            "image": "stripped_warped_stem",
+            "desc": "Fancy Dual Absorber",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "teal",
+            "special": [
+                "If there is Any Block on Both Ends, Removes Both Ends"
+            ]
+        },
+        "honey": {
+            "name": "Honey",
+            "image": "honey_block_side",
+            "desc": "The Neutralizer",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "yellow",
+            "special": [
+                "The Block Above this one will not preform any Actions"
+            ]
+        },
+        "red metal": {
+            "name": "Red Metal",
+            "image": "red_concrete",
+            "desc": "Why do we need colored concrete",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "red",
+            "special": [
+                "Is Colored Red"
+            ]
+        },
+        "orange metal": {
+            "name": "Orange Metal",
+            "image": "orange_concrete",
+            "desc": "Im running out of ideas for descs",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "orange",
+            "special": [
+                "Is Colored Orange"
+            ]
+        },
+        "yellow metal": {
+            "name": "Yellow Metal",
+            "image": "yellow_concrete",
+            "desc": "This is even closer to the sun",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "yellow",
+            "special": [
+                "Is Colored Yellow"
+            ]
+        },
+        "green metal": {
+            "name": "Green Metal",
+            "image": "lime_concrete",
+            "desc": "This is technically lime!",
+            "movement": [
+                "Doesn't Move on its Own"
+            ],
+            "color": "green",
+            "special": [
+                "Is Colored Green"
+            ]
+        },
+        "blue metal": {
+            "name": "Blue Metal",
+            "image": "light_blue_concrete",
+            "desc": "We have been lied to!",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "blue",
+            "special": [
+                "Is Colored Blue"
+            ]
+        },
+        "purple metal": {
+            "name": "Purple Metal",
+            "image": "magenta_concrete",
+            "desc": "This is the lighter purple metal!",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "purple",
+            "special": [
+                "Is Colored Purple"
+            ]
+        },
+        "off redstone lamp": {
+            "name": "Off Redstone Lamp",
+            "image": "redstone_lamp",
+            "desc": "Refuses to turn on",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "darker_grey"
+        },
+        "on redstone lamp": {
+            "name": "On Redstone Lamp",
+            "image": "redstone_lamp_on",
+            "desc": "Will guide your way",
+            "movement": [
+                "Doesn't Move on Its Own"
+            ],
+            "color": "yellow"
         }
     }
 }
